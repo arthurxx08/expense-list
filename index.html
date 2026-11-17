@@ -1,150 +1,111 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f7f7f5">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="費用一覧">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="icon" href="./icon.svg" type="image/svg+xml">
-<title>費用一覧</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f7f5"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="費用一覧">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon.svg" type="image/svg+xml"><title>費用一覧</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;color:#202124;background:#f5f5f2;font-synthesis:none}
-*{box-sizing:border-box}
-body{margin:0;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);max-width:760px;margin-inline:auto}
-header{padding:20px 18px 12px;display:flex;align-items:center;justify-content:space-between}
-h1{font-size:23px;margin:0;font-weight:750;letter-spacing:.02em}
-.sub{color:#737373;font-size:12px;margin-top:4px}
-nav{display:flex;gap:8px;padding:0 16px 12px}
-nav button{flex:1;border:0;border-radius:12px;padding:12px 8px;background:#e8e8e3;color:#555;font-size:14px;font-weight:650}
-nav button.active{background:#202124;color:white}
-main{padding:0 14px 30px}
-.panel{background:white;border:1px solid #e8e8e4;border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 2px 10px #00000006}
-h2{font-size:16px;margin:0 0 14px}
-label{display:block;font-size:12px;color:#626262;font-weight:650;margin:0 0 6px}
+*{box-sizing:border-box}body{margin:0;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);max-width:760px;margin-inline:auto}
+header{padding:20px 18px 12px;display:flex;align-items:center;justify-content:flex-start;gap:10px}
+h1{font-size:23px;margin:0;font-weight:750;letter-spacing:.02em}.appicon{width:30px;height:30px;object-fit:contain}
+.sub{color:#737373;font-size:12px;margin-top:4px}nav{display:flex;gap:7px;padding:0 12px 12px}
+nav button{flex:1;border:0;border-radius:12px;padding:11px 5px;background:#e8e8e3;color:#555;font-size:13px;font-weight:650}
+nav button.active{background:#202124;color:white}main{padding:0 14px 30px}.panel{background:white;border:1px solid #e8e8e4;border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 2px 10px #00000006}
+h2{font-size:16px;margin:0 0 14px}label{display:block;font-size:12px;color:#626262;font-weight:650;margin:0 0 6px}
 input,select,textarea{width:100%;min-height:46px;border:1px solid #deded8;border-radius:11px;background:#fff;padding:10px 12px;font:inherit;font-size:16px;color:#202124}
-textarea{resize:vertical;min-height:70px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field{margin-bottom:13px}
-.field:last-child{margin-bottom:0}
-.wide{grid-column:1/-1}
+textarea{resize:vertical;min-height:70px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin-bottom:13px}.field:last-child{margin-bottom:0}.wide{grid-column:1/-1}
 button.primary{width:100%;border:0;border-radius:12px;background:#202124;color:#fff;font-size:16px;font-weight:700;padding:14px;margin-top:3px}
 button.secondary,.smallbtn{border:1px solid #deded8;background:white;border-radius:10px;padding:9px 11px;font-size:13px;color:#333}
-.smallbtn.danger{color:#a22;border-color:#e8caca}
-.checkline{display:flex;align-items:center;gap:10px;min-height:46px}
-.checkline input{width:22px;height:22px;min-height:0;accent-color:#202124}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.toolbar input{flex:1;min-width:150px}
-.item{border-top:1px solid #eee;padding:13px 0;display:flex;gap:12px;align-items:flex-start}
-.item:first-child{border-top:0;padding-top:0}
-.itemmain{flex:1;min-width:0}
-.itemtitle{font-weight:700;font-size:15px;overflow-wrap:anywhere}
-.meta{color:#777;font-size:12px;margin-top:4px;line-height:1.6}
-.amount{font-weight:750;font-size:16px;white-space:nowrap;text-align:right}
-.tag{display:inline-block;background:#f0f0ec;border-radius:6px;padding:2px 6px;margin-right:4px}
-.actions{display:flex;gap:6px;margin-top:8px}
-.empty{text-align:center;color:#888;padding:25px 5px;font-size:14px}
-.note{font-size:12px;color:#777;line-height:1.6}
-.settings-row{padding:12px 0;border-top:1px solid #eee}
-.settings-row:first-of-type{border-top:0}
-.settings-row textarea{min-height:78px;font-size:14px}
-.hidden{display:none!important}
-footer{text-align:center;color:#999;font-size:11px;padding:10px 15px 28px}
-@media(max-width:420px){.grid{grid-template-columns:1fr 1fr}.panel{padding:14px}}
-</style>
-</head>
+.smallbtn.danger{color:#a22;border-color:#e8caca}.checkline{display:flex;align-items:center;gap:10px;min-height:42px}
+.checkline input,.exclude input{width:21px;height:21px;min-height:0;accent-color:#202124}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.toolbar input{flex:1;min-width:130px}
+.item{border-top:1px solid #eee;padding:13px 0;display:flex;gap:12px;align-items:flex-start}.item:first-child{border-top:0;padding-top:0}
+.itemmain{flex:1;min-width:0}.itemtitle{font-weight:700;font-size:15px;overflow-wrap:anywhere}.meta{color:#777;font-size:12px;margin-top:4px;line-height:1.6}
+.amount{font-weight:750;font-size:16px;white-space:nowrap;text-align:right}.tag{display:inline-block;background:#f0f0ec;border-radius:6px;padding:2px 6px;margin-right:4px}
+.actions{display:flex;gap:6px;margin-top:8px}.empty{text-align:center;color:#888;padding:25px 5px;font-size:14px}
+.note{font-size:12px;color:#777;line-height:1.6}.settings-row{padding:12px 0;border-top:1px solid #eee}.settings-row:first-of-type{border-top:0}
+.settings-row textarea{min-height:78px;font-size:14px}.hidden{display:none!important}footer{text-align:center;color:#999;font-size:11px;padding:10px 15px 28px}
+.totalbar{display:flex;justify-content:space-between;align-items:center;background:#f4f4f0;border-radius:12px;padding:12px;margin:0 0 12px;font-size:13px}
+.totalbar strong{font-size:19px}.exclude{display:flex;align-items:center;gap:7px;color:#8a4b32;font-size:12px;margin-top:8px}
+.personrow{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid #eee;font-size:14px}
+.transfer{padding:13px;background:#f4f4f0;border-radius:12px;margin-top:9px;font-weight:700}
+@media(max-width:420px){.grid{grid-template-columns:1fr 1fr}.panel{padding:14px}nav button{font-size:12px}}
+</style></head>
 <body>
-<header><div><h1>費用一覧</h1><div class="sub">支出をシンプルに記録</div></div><span aria-hidden="true">🧾</span></header>
-<nav>
-<button class="active" data-tab="entry">入力</button>
-<button data-tab="list">一覧</button>
-<button data-tab="settings">設定・出力</button>
-</nav>
+<header><img class="appicon" src="./icon.svg" alt=""><div><h1>費用一覧</h1><div class="sub">支出をシンプルに記録</div></div></header>
+<nav><button class="active" data-tab="entry">入力</button><button data-tab="list">一覧</button><button data-tab="settle">費用精算</button><button data-tab="settings">設定</button></nav>
 <main>
-<section id="entry" class="tab">
-<div class="panel">
-<h2 id="formTitle">費用を入力</h2>
-<form id="entryForm">
-<div class="grid">
+<section id="entry" class="tab"><div class="panel"><h2 id="formTitle">費用を入力</h2><form id="entryForm"><div class="grid">
 <div class="field"><label for="date">日付</label><input id="date" type="date" required></div>
-<div class="field"><label for="amount">金額（円）</label><input id="amount" type="number" inputmode="numeric" min="0" step="1" placeholder="例：2500" required></div>
+<div class="field"><label for="amount">金額</label><input id="amount" type="number" inputmode="decimal" min="0" step="any" placeholder="例：2500" required></div>
+<div class="field"><label for="currency">通貨</label><select id="currency"></select></div>
+<div class="field"><label for="rate">1通貨あたりの円換算レート</label><input id="rate" type="number" inputmode="decimal" min="0.000001" step="any" value="1" required></div>
 <div class="field"><label for="usage">用途</label><select id="usage"></select></div>
 <div class="field"><label for="method">支払い方法</label><select id="method"></select></div>
 <div class="field"><label for="payer">支払い者</label><select id="payer"></select></div>
 <div class="field"><label>レシート確認</label><div class="checkline"><input id="receipt" type="checkbox"><span>レシートと照合済み</span></div></div>
 <div class="field wide"><label for="summary">概要</label><input id="summary" type="text" maxlength="120" placeholder="例：スーパーで食料品" required></div>
-</div>
-<button class="primary" type="submit" id="saveBtn">登録する</button>
-<button class="secondary hidden" type="button" id="cancelEdit" style="width:100%;margin-top:8px">編集をキャンセル</button>
-</form>
-</div>
-<p class="note">入力内容はこのiPhoneのブラウザ内に保存されます。定期的に「設定・出力」からバックアップしてください。</p>
-</section>
-
-<section id="list" class="tab hidden">
-<div class="panel">
-<h2>登録データ</h2>
-<div class="toolbar"><input id="search" type="search" placeholder="概要・用途で検索"><button class="smallbtn" id="sortBtn">日付：新しい順</button></div>
-<div id="records"></div>
-</div>
-</section>
-
+<div class="field wide"><div class="note" id="yenPreview">円換算額：1円（例：1 KRW = 0.11円）</div></div>
+</div><button class="primary" type="submit" id="saveBtn">登録する</button><button class="secondary hidden" type="button" id="cancelEdit" style="width:100%;margin-top:8px">編集をキャンセル</button></form></div>
+<p class="note">入力内容はこのiPhoneのブラウザ内に保存されます。定期的に「設定」からバックアップしてください。</p></section>
+<section id="list" class="tab hidden"><div class="panel"><h2>登録データ</h2><div class="totalbar"><span>表示中データの合計（円換算）</span><strong id="listTotal">0円</strong></div><div class="toolbar"><input id="search" type="search" placeholder="概要・用途で検索"><button class="smallbtn" id="sortBtn">日付：新しい順</button></div><div id="records"></div></div></section>
+<section id="settle" class="tab hidden"><div class="panel"><h2>精算する支出を選択</h2><p class="note">チェックを入れた支出は精算対象から除外されます。チェックのない支出を対象に、支払い者ごとの立替額を集計します。外貨は登録時の円換算レートで計算します。</p><div id="settleRecords"></div></div><div class="panel"><h2>精算結果</h2><div class="field"><label for="participants">精算人数</label><select id="participants"><option value="2">2人</option><option value="3">3人</option></select></div><div id="settleResult"><div class="empty">精算対象の支出がありません</div></div></div></section>
 <section id="settings" class="tab hidden">
-<div class="panel">
-<h2>CSV・バックアップ</h2>
-<p class="note">CSVは1行につき1件のデータです。Excelで開きやすいUTF-8 BOM付きで出力します。</p>
-<button class="primary" id="csvBtn">CSVを書き出す</button>
-<button class="secondary" id="backupBtn" style="width:100%;margin-top:8px">全データをバックアップ（JSON）</button>
-<div class="field" style="margin-top:14px"><label for="restoreFile">バックアップから復元</label><input id="restoreFile" type="file" accept=".json,application/json"></div>
-</div>
-<div class="panel">
-<h2>選択肢の編集</h2>
-<p class="note">1行に1つずつ入力してください。ここで変更した選択肢が入力画面に反映されます。</p>
-<div class="settings-row"><label for="usageOptions">用途</label><textarea id="usageOptions"></textarea></div>
-<div class="settings-row"><label for="methodOptions">支払い方法</label><textarea id="methodOptions"></textarea></div>
-<div class="settings-row"><label for="payerOptions">支払い者</label><textarea id="payerOptions"></textarea></div>
-<button class="primary" id="saveOptions">選択肢を保存</button>
-</div>
-<div class="panel">
-<h2>データ管理</h2>
-<button class="secondary danger" id="deleteAll" style="width:100%">全データを削除</button>
-<p class="note">削除すると元に戻せません。先にバックアップを取ってください。</p>
-</div>
-</section>
-</main>
-<footer>費用一覧アプリ · データは端末内に保存</footer>
+<div class="panel"><h2>CSV・バックアップ</h2><p class="note">CSVは円換算額・元通貨額の両方を出力します。バックアップには選択肢や精算除外設定も含まれます。</p><button class="primary" id="csvBtn">CSVを書き出す</button><button class="secondary" id="backupBtn" style="width:100%;margin-top:8px">全データをバックアップ（JSON）</button><div class="field" style="margin-top:14px"><label for="restoreFile">バックアップから復元</label><input id="restoreFile" type="file" accept=".json,application/json"></div></div>
+<div class="panel"><h2>選択肢の編集</h2><p class="note">1行に1つずつ入力してください。支払い者は精算に参加する人の名前にしてください（最大3人）。</p><div class="settings-row"><label for="usageOptions">用途</label><textarea id="usageOptions"></textarea></div><div class="settings-row"><label for="methodOptions">支払い方法</label><textarea id="methodOptions"></textarea></div><div class="settings-row"><label for="payerOptions">支払い者・参加者</label><textarea id="payerOptions"></textarea></div><button class="primary" id="saveOptions">選択肢を保存</button></div>
+<div class="panel"><h2>データ管理</h2><button class="secondary danger" id="deleteAll" style="width:100%">全データを削除</button><p class="note">削除すると元に戻せません。先にバックアップを取ってください。</p></div></section>
+</main><footer>費用一覧アプリ · データは端末内に保存<br><span>vol.2</span></footer>
 <script>
-const DB_NAME='ExpenseListDB', STORE='records';
-let db, editingId=null, newestFirst=true;
+const DB_NAME='ExpenseListDB',STORE='records';let db,editingId=null,newestFirst=true;
 const defaults={usage:['食費','交通費','宿泊費','買い物','娯楽','日用品','その他'],method:['現金','クレジットカード','電子マネー','銀行振込','その他'],payer:['自分','相手']};
 let options=JSON.parse(localStorage.getItem('expenseOptions')||'null')||defaults;
-const $=id=>document.getElementById(id);
-const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+let excluded=JSON.parse(localStorage.getItem('expenseExcluded')||'[]');
+const currencies=[['JPY','日本円'],['USD','米ドル'],['KRW','韓国ウォン'],['EUR','ユーロ'],['GBP','英ポンド'],['TWD','台湾ドル'],['THB','タイバーツ'],['AUD','豪ドル'],['CAD','カナダドル'],['CNY','中国元'],['SGD','シンガポールドル'],['HKD','香港ドル']];
+const $=id=>document.getElementById(id),today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
 function openDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,1);req.onupgradeneeded=()=>{const s=req.result.createObjectStore(STORE,{keyPath:'id',autoIncrement:true});s.createIndex('date','date')};req.onsuccess=()=>{db=req.result;resolve()};req.onerror=()=>reject(req.error)})}
 function all(){return new Promise((resolve,reject)=>{const r=db.transaction(STORE).objectStore(STORE).getAll();r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
-function put(v){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');const r=v.id?tx.objectStore(STORE).put(v):tx.objectStore(STORE).add(v);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
+function put(v){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite'),r=v.id?tx.objectStore(STORE).put(v):tx.objectStore(STORE).add(v);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
 function remove(id){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).delete(Number(id));tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
 function clearAll(){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).clear();tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
 function fillSelect(id,arr){const el=$(id),old=el.value;el.innerHTML='';arr.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;el.append(o)});if(arr.includes(old))el.value=old}
 function applyOptions(){fillSelect('usage',options.usage);fillSelect('method',options.method);fillSelect('payer',options.payer);$('usageOptions').value=options.usage.join('\n');$('methodOptions').value=options.method.join('\n');$('payerOptions').value=options.payer.join('\n')}
-function tab(name){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('hidden',x.id!==name));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.tab===name));if(name==='list')render()}
+function initCurrencies(){fillSelect('currency',currencies.map(c=>c[0]));$('currency').value='JPY';$('currency').addEventListener('change',()=>{if($('currency').value==='JPY')$('rate').value=1;preview()})}
+function yen(r){return Number(r.amount||0)*Number(r.rate??1)}
+function money(n){return Math.round(n).toLocaleString('ja-JP')+'円'}
+function fmtOriginal(r){return `${Number(r.amount).toLocaleString('ja-JP')} ${r.currency||'JPY'}`}
+function preview(){$('yenPreview').textContent='円換算額：'+money(Number($('amount').value||0)*Number($('rate').value||0))}
+function tab(name){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('hidden',x.id!==name));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.tab===name));if(name==='list')render();if(name==='settle')renderSettlement()}
 document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>tab(b.dataset.tab)));
-$('date').value=today();
-$('entryForm').addEventListener('submit',async e=>{e.preventDefault();const v={date:$('date').value,usage:$('usage').value,summary:$('summary').value.trim(),amount:Number($('amount').value),method:$('method').value,payer:$('payer').value,receipt:$('receipt').checked,updatedAt:new Date().toISOString()};if(editingId!==null)v.id=editingId;await put(v);resetForm();alert('登録しました');});
-function resetForm(){editingId=null;$('entryForm').reset();$('date').value=today();$('receipt').checked=false;$('formTitle').textContent='費用を入力';$('saveBtn').textContent='登録する';$('cancelEdit').classList.add('hidden')}
+$('date').value=today();$('amount').addEventListener('input',preview);$('rate').addEventListener('input',preview);
+$('entryForm').addEventListener('submit',async e=>{e.preventDefault();const currency=$('currency').value,rate=Number($('rate').value);if(!(rate>0)){alert('円換算レートは0より大きい値を入力してください');return}
+const v={date:$('date').value,usage:$('usage').value,summary:$('summary').value.trim(),amount:Number($('amount').value),currency,rate,method:$('method').value,payer:$('payer').value,receipt:$('receipt').checked,updatedAt:new Date().toISOString()};
+if(editingId!==null)v.id=editingId;await put(v);resetForm();alert('登録しました');});
+function resetForm(){editingId=null;$('entryForm').reset();$('date').value=today();$('currency').value='JPY';$('rate').value=1;$('receipt').checked=false;$('formTitle').textContent='費用を入力';$('saveBtn').textContent='登録する';$('cancelEdit').classList.add('hidden');preview()}
 $('cancelEdit').onclick=resetForm;
-async function editRecord(id){const r=(await all()).find(x=>x.id===Number(id));if(!r)return;editingId=r.id;$('date').value=r.date;$('usage').value=r.usage;$('summary').value=r.summary;$('amount').value=r.amount;$('method').value=r.method;$('payer').value=r.payer;$('receipt').checked=r.receipt;$('formTitle').textContent='費用を編集';$('saveBtn').textContent='変更を保存';$('cancelEdit').classList.remove('hidden');tab('entry');window.scrollTo(0,0)}
-async function render(){const q=$('search').value.trim().toLowerCase();let rows=await all();rows=rows.filter(r=>!q||[r.summary,r.usage,r.method,r.payer].join(' ').toLowerCase().includes(q));rows.sort((a,b)=>(a.date||'').localeCompare(b.date||'')*(newestFirst?-1:1)||b.id-a.id);const root=$('records');root.innerHTML='';if(!rows.length){root.innerHTML='<div class="empty">まだデータがありません</div>';return}rows.forEach(r=>{const el=document.createElement('div');el.className='item';const left=document.createElement('div');left.className='itemmain';const title=document.createElement('div');title.className='itemtitle';title.textContent=r.summary;const meta=document.createElement('div');meta.className='meta';meta.textContent=`${r.date} · ${r.usage} · ${r.method} · ${r.payer} · レシート${r.receipt?'確認済み':'未確認'}`;left.append(title,meta);const right=document.createElement('div');right.innerHTML=`<div class="amount">${Number(r.amount).toLocaleString('ja-JP')}円</div>`;const actions=document.createElement('div');actions.className='actions';const eb=document.createElement('button');eb.className='smallbtn';eb.textContent='編集';eb.onclick=()=>editRecord(r.id);const dbtn=document.createElement('button');dbtn.className='smallbtn danger';dbtn.textContent='削除';dbtn.onclick=async()=>{if(confirm('このデータを削除しますか？')){await remove(r.id);render()}};actions.append(eb,dbtn);right.append(actions);el.append(left,right);root.append(el)})}
+async function editRecord(id){const r=(await all()).find(x=>x.id===Number(id));if(!r)return;editingId=r.id;$('date').value=r.date;$('usage').value=r.usage;$('summary').value=r.summary;$('amount').value=r.amount;$('currency').value=r.currency||'JPY';$('rate').value=r.rate??1;$('method').value=r.method;$('payer').value=r.payer;$('receipt').checked=r.receipt;$('formTitle').textContent='費用を編集';$('saveBtn').textContent='変更を保存';$('cancelEdit').classList.remove('hidden');preview();tab('entry');window.scrollTo(0,0)}
+async function render(){const q=$('search').value.trim().toLowerCase();let rows=await all();rows=rows.filter(r=>!q||[r.summary,r.usage,r.method,r.payer,r.currency].join(' ').toLowerCase().includes(q));rows.sort((a,b)=>(a.date||'').localeCompare(b.date||'')*(newestFirst?-1:1)||b.id-a.id);$('listTotal').textContent=money(rows.reduce((s,r)=>s+yen(r),0));const root=$('records');root.innerHTML='';if(!rows.length){root.innerHTML='<div class="empty">まだデータがありません</div>';return}
+rows.forEach(r=>{const el=document.createElement('div');el.className='item';const left=document.createElement('div');left.className='itemmain';const title=document.createElement('div');title.className='itemtitle';title.textContent=r.summary;const meta=document.createElement('div');meta.className='meta';meta.textContent=`${r.date} · ${r.usage} · ${r.method} · ${r.payer} · ${r.currency||'JPY'} · ${r.receipt?'レシート確認済み':'レシート未確認'}`;left.append(title,meta);const right=document.createElement('div');right.innerHTML=`<div class="amount">${fmtOriginal(r)}</div><div class="meta" style="text-align:right">約${money(yen(r))}</div>`;const actions=document.createElement('div');actions.className='actions';const eb=document.createElement('button');eb.className='smallbtn';eb.textContent='編集';eb.onclick=()=>editRecord(r.id);const dbtn=document.createElement('button');dbtn.className='smallbtn danger';dbtn.textContent='削除';dbtn.onclick=async()=>{if(confirm('このデータを削除しますか？')){await remove(r.id);render()}};actions.append(eb,dbtn);right.append(actions);el.append(left,right);root.append(el)})}
 $('search').addEventListener('input',render);$('sortBtn').onclick=()=>{newestFirst=!newestFirst;$('sortBtn').textContent='日付：'+(newestFirst?'新しい順':'古い順');render()};
+async function renderSettlement(){const rows=(await all()).sort((a,b)=>(b.date||'').localeCompare(a.date||''));const root=$('settleRecords');root.innerHTML='';if(!rows.length)root.innerHTML='<div class="empty">まだデータがありません</div>';
+rows.forEach(r=>{const wrap=document.createElement('div');wrap.className='item';const main=document.createElement('div');main.className='itemmain';const t=document.createElement('div');t.className='itemtitle';t.textContent=r.summary;const m=document.createElement('div');m.className='meta';m.textContent=`${r.date} · ${r.payer} · ${fmtOriginal(r)}（約${money(yen(r))}）`;const lab=document.createElement('label');lab.className='exclude';const cb=document.createElement('input');cb.type='checkbox';cb.checked=excluded.includes(r.id);cb.onchange=()=>{excluded=cb.checked?[...excluded,r.id]:excluded.filter(x=>x!==r.id);localStorage.setItem('expenseExcluded',JSON.stringify(excluded));renderSettlement()};lab.append(cb,document.createTextNode('精算から除外'));main.append(t,m,lab);wrap.append(main);root.append(wrap)});
+const active=rows.filter(r=>!excluded.includes(r.id));const count=Number($('participants').value);const people=options.payer.slice(0,count);const result=$('settleResult');result.innerHTML='';
+if(people.length<count){result.innerHTML='<div class="empty">設定で精算参加者を'+count+'人以上登録してください</div>';return}
+const outsiders=active.filter(r=>!people.includes(r.payer));if(outsiders.length){result.innerHTML='<div class="empty">精算対象に、選択した人数に含まれていない支払い者のデータがあります。精算人数を変更するか、該当データを精算対象から除外してください。</div>';return}const total=active.reduce((s,r)=>s+yen(r),0),share=total/count;const net=people.map(name=>({name,net:active.filter(r=>r.payer===name).reduce((s,r)=>s+yen(r),0)-share}));
+const summary=document.createElement('div');summary.className='totalbar';summary.innerHTML=`<span>精算対象合計（${active.length}件）</span><strong>${money(total)}</strong>`;result.append(summary);
+net.forEach(p=>{const row=document.createElement('div');row.className='personrow';row.innerHTML=`<span>${p.name} の立替額</span><strong>${money(p.net+share)}</strong>`;result.append(row)});
+let creditors=net.filter(x=>x.net>0.5).map(x=>({...x})),debtors=net.filter(x=>x.net<-.5).map(x=>({...x}));let transfers=[];
+while(debtors.length&&creditors.length){const d=debtors[0],c=creditors[0],v=Math.min(-d.net,c.net);transfers.push(`${d.name} → ${c.name}：${money(v)}`);d.net+=v;c.net-=v;if(d.net>=-.5)debtors.shift();if(c.net<=.5)creditors.shift()}
+if(!active.length){result.insertAdjacentHTML('beforeend','<div class="empty">精算対象の支出がありません</div>')}else if(!transfers.length){result.insertAdjacentHTML('beforeend','<div class="transfer">精算は不要です。支出は均等です。</div>')}else transfers.forEach(t=>{const div=document.createElement('div');div.className='transfer';div.textContent=t;result.append(div)});
+}
+$('participants').onchange=renderSettlement;
 function download(name,blob){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}
 function csvCell(v){return '"'+String(v??'').replace(/"/g,'""')+'"'}
-$('csvBtn').onclick=async()=>{const rows=await all();rows.sort((a,b)=>(a.date||'').localeCompare(b.date||'')||a.id-b.id);const head=['日付','用途','概要','金額','支払い方法','支払い者','レシート確認'];const lines=[head,...rows.map(r=>[r.date,r.usage,r.summary,r.amount,r.method,r.payer,r.receipt?'TRUE':'FALSE'])].map(row=>row.map(csvCell).join(','));download(`費用一覧_${today()}.csv`,new Blob(['\uFEFF'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'}))};
-$('backupBtn').onclick=async()=>{const payload={app:'費用一覧',version:1,exportedAt:new Date().toISOString(),options,records:await all()};download(`費用一覧バックアップ_${today()}.json`,new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}))};
-$('restoreFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const p=JSON.parse(await f.text());if(!Array.isArray(p.records))throw Error();if(!confirm('現在のデータをバックアップ内容で置き換えます。よろしいですか？'))return;await clearAll();for(const r of p.records){const {id,...v}=r;await put(v)}if(p.options){options=p.options;localStorage.setItem('expenseOptions',JSON.stringify(options));applyOptions()}alert('復元しました')}catch(_){alert('バックアップファイルを読み込めませんでした')}e.target.value=''};
-$('saveOptions').onclick=()=>{const parse=id=>$(id).value.split('\n').map(x=>x.trim()).filter(Boolean);const next={usage:parse('usageOptions'),method:parse('methodOptions'),payer:parse('payerOptions')};if(Object.values(next).some(a=>!a.length)){alert('各項目に1つ以上の選択肢を設定してください');return}options=next;localStorage.setItem('expenseOptions',JSON.stringify(options));applyOptions();alert('選択肢を保存しました')};
-$('deleteAll').onclick=async()=>{if(confirm('全データを削除します。この操作は取り消せません。続けますか？')){await clearAll();render();alert('全データを削除しました')}};
-(async()=>{await openDB();applyOptions();if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});})();
-</script>
-</body></html>
+$('csvBtn').onclick=async()=>{const rows=await all();rows.sort((a,b)=>(a.date||'').localeCompare(b.date||'')||a.id-b.id);const head=['日付','用途','概要','元金額','通貨','円換算レート','円換算額','支払い方法','支払い者','レシート確認','精算除外'];const lines=[head,...rows.map(r=>[r.date,r.usage,r.summary,r.amount,r.currency||'JPY',r.rate??1,yen(r),r.method,r.payer,r.receipt?'TRUE':'FALSE',excluded.includes(r.id)?'TRUE':'FALSE'])].map(row=>row.map(csvCell).join(','));download(`費用一覧_${today()}.csv`,new Blob(['\uFEFF'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'}))};
+$('backupBtn').onclick=async()=>{const payload={app:'費用一覧',version:2,exportedAt:new Date().toISOString(),options,excluded,records:await all()};download(`費用一覧バックアップ_${today()}.json`,new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}))};
+$('restoreFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const p=JSON.parse(await f.text());if(!Array.isArray(p.records))throw Error();if(!confirm('現在のデータをバックアップ内容で置き換えます。よろしいですか？'))return;await clearAll();for(const r of p.records){const {id,...v}=r;await put(v)}if(p.options){options=p.options;localStorage.setItem('expenseOptions',JSON.stringify(options));applyOptions()}excluded=Array.isArray(p.excluded)?p.excluded:[];localStorage.setItem('expenseExcluded',JSON.stringify(excluded));alert('復元しました');renderSettlement()}catch(_){alert('バックアップファイルを読み込めませんでした')}e.target.value=''};
+$('saveOptions').onclick=()=>{const parse=id=>$(id).value.split('\n').map(x=>x.trim()).filter(Boolean);const next={usage:parse('usageOptions'),method:parse('methodOptions'),payer:parse('payerOptions')};if(Object.values(next).some(a=>!a.length)){alert('各項目に1つ以上の選択肢を設定してください');return}if(next.payer.length>3){alert('支払い者・参加者は3人までです');return}options=next;localStorage.setItem('expenseOptions',JSON.stringify(options));applyOptions();alert('選択肢を保存しました')};
+$('deleteAll').onclick=async()=>{if(confirm('全データを削除します。この操作は取り消せません。続けますか？')){await clearAll();excluded=[];localStorage.setItem('expenseExcluded','[]');render();renderSettlement();alert('全データを削除しました')}};
+(async()=>{await openDB();initCurrencies();applyOptions();preview();if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{})})();
+</script></body></html>
